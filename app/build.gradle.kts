@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+//    implementation("androidx.compose.material3:material3-expressive:1.4.0-alpha04")
     implementation(libs.androidx.material3.window.size.class1)
     // Material icons
     implementation(libs.androidx.material.icons.core)

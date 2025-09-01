@@ -240,16 +240,58 @@ sealed class CalculatorList {
 
     object XIRR : CalculatorList() {
         override val name = "XIRR"
-        override val description = "Calculate XIRR for uneven cashflows and investments."
+        override val description = "Calculate XIRR for uneven cash-flows and investments."
         override val icon = Icons.Default.Timeline
     }
 
     companion object {
         val allItems = listOf(
-            SIP, Lumpsum, SWP, MutualFund, SSY, PPF, EPF, FD, RD, NPS, HRA, Retirement,
-            EMI, VehicleLoanEMI, HomeLoanEMI, SimpleInterest, CompoundInterest, NSC, StepUpSIP,
-            IncomeTax, Gratuity, APY, CAGR, GST, FlatVsReducing, Brokerage, Margin, TDS, Salary,
-            Inflation, PostOfficeMIS, SCSS, StockAverage, XIRR
+            SIP,
+            Lumpsum,
+            SWP,
+            MutualFund,
+            SSY,
+            PPF,
+            EPF,
+            FD,
+            RD,
+            NPS,
+            HRA,
+            Retirement,
+            EMI,
+            VehicleLoanEMI,
+            HomeLoanEMI,
+            SimpleInterest,
+            CompoundInterest,
+            NSC,
+            StepUpSIP,
+            IncomeTax,
+            Gratuity,
+            APY,
+            CAGR,
+            GST,
+            FlatVsReducing,
+            Brokerage,
+            Margin,
+            TDS,
+            Salary,
+            Inflation,
+            PostOfficeMIS,
+            SCSS,
+            StockAverage,
+            XIRR
         )
+
+        fun findByTitle(name: String): CalculatorList? = allItems.find { it.name == name }
+
+        fun search(query: String): List<CalculatorList> = allItems.filter {
+            it.name.contains(
+                query, ignoreCase = true
+            ) || it.description.contains(
+                query, ignoreCase = true
+            )
+        }
+
+
     }
 }
