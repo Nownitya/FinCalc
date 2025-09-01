@@ -12,6 +12,7 @@ import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.nowni.fincalc.models.CalculatorList
+import com.nowni.fincalc.ui.screens.calculator_screens.SipCalScreen
 import com.nowni.fincalc.ui.screens.home_screen.HomeScreen
 import com.nowni.fincalc.utils.helper.itemToType
 
@@ -21,7 +22,6 @@ fun AppNavGraph() {
 //    val backStack = remember { mutableStateListOf<NavKey>(Home) }
     val backStack: SnapshotStateList<NavKey> = rememberNavBackStack(Home)
     val homeListState = rememberLazyListState()
-//    val onBackPress = backStack.removeLastOrNull()
 
     val entryDecorators = listOf(
         rememberSavedStateNavEntryDecorator(),
@@ -35,27 +35,25 @@ fun AppNavGraph() {
             HomeScreen(
                 listState = homeListState, onCardClick = { index ->
                     val item = CalculatorList.allItems.getOrNull(index)
-//                    val safeIndex = index.coerceIn(0, items.lastIndex)
-//                    val item = items.getOrNull(safeIndex)
                     val type = itemToType(item)
 
                     type?.let { backStack.add(CalculatorScreenKey(it)) }
-
                 }
-
             )
         }
         entry<CalculatorScreenKey> { key ->
             when (key.type) {
-                "SIP" -> {}
+                "SIP" -> SipCalScreen(onBack = {
+                    if (backStack.size > 1) backStack.removeLastOrNull()
+                }
+                )
+
                 "Lumpsum" -> {}
                 "SWP" -> {}
                 "Mutual Fund" -> {}
                 else -> {}
             }
-
         }
-
     }
 
     NavDisplay(
@@ -64,6 +62,4 @@ fun AppNavGraph() {
         onBack = { if (backStack.size > 1) backStack.removeLastOrNull() },
         entryProvider = entryProvider,
     )
-
-
 }

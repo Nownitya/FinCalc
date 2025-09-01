@@ -30,7 +30,6 @@ import com.nowni.fincalc.ui.theme.FinCalcTheme
 @Composable
 fun HomeScreen(
     listState: LazyListState,
-    modifier: Modifier = Modifier,
     onCardClick: (index: Int) -> Unit = {},
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -87,7 +86,6 @@ fun HomeScreen(
 @Composable
 fun HomeScreen1(
     listState: LazyListState,
-    modifier: Modifier = Modifier,
     onCardClick: (index: Int) -> Unit = {},
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()

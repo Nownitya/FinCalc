@@ -70,6 +70,7 @@ dependencies {
 
     //  Work Runtime
     implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.constraintlayout.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
