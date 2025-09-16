@@ -1,6 +1,8 @@
 package com.nowni.fincalc.ui.screens.calculator_screens
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,19 +22,25 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nowni.fincalc.domain.sip.model.SipResult
+import com.nowni.fincalc.domain.sip.model.SipType
 import com.nowni.fincalc.ui.component.LabelValueRow
 import com.nowni.fincalc.ui.component.SliderWithTitle
 import com.nowni.fincalc.ui.theme.FinCalcTheme
@@ -43,12 +51,12 @@ import kotlin.math.pow
 @Composable
 fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
     var monthlyInvestment by remember { mutableFloatStateOf(25_000f) }
-    var expectedReturn by remember { mutableFloatStateOf(12f) }
+    var expectedReturnRate by remember { mutableFloatStateOf(12f) }
     var timePeriod by remember { mutableFloatStateOf(10f) }
 
-//    var selectedTabIndex by remember { mutableIntStateOf(0) }
-//    val sipType = SipType.entries.toTypedArray()
-//    val selectedType = sipType[selectedTabIndex]
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    val sipType = SipType.entries.toTypedArray()
+    val selectedType = sipType[selectedTabIndex]
 
     val rupeeSymbol = "₹"
 
@@ -57,9 +65,36 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
         derivedStateOf { (timePeriod * 12).toInt() }
     }
 
-    val futureValue by remember(monthlyInvestment, expectedReturn, timePeriod) {
+
+    val sipResult by remember(monthlyInvestment, expectedReturnRate, timePeriod, selectedType)  {
         derivedStateOf {
-            val monthlyRate = expectedReturn / 100 / 12
+            val monthlyRate = expectedReturnRate / 100 / 12
+            val invested = monthlyInvestment * months
+
+            val total =if(monthlyRate>0f){
+                when (selectedType){
+                    SipType.ORDINARY -> {
+                        monthlyInvestment * ((1 + monthlyRate).pow(months) - 1) / monthlyRate
+                    }
+                    SipType.ANNUITY_DUE -> {
+                        monthlyInvestment * ((1 + monthlyRate).pow(months) - 1) / monthlyRate * (1 + monthlyRate)
+                    }
+                }
+            }else{
+                invested
+            }
+            val estReturn = total - invested
+            SipResult(
+                investedAmount = invested,
+                estReturn= estReturn,
+                totalValue = total
+            )
+        }
+    }
+
+    /*val futureValue by remember(monthlyInvestment, expectedReturnRate, timePeriod) {
+        derivedStateOf {
+            val monthlyRate = expectedReturnRate / 100 / 12
             if (monthlyRate > 0) {
                 monthlyInvestment * ((1 + monthlyRate).pow(months) - 1) / monthlyRate * (1 + monthlyRate)
             } else {
@@ -78,7 +113,7 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
         derivedStateOf {
             futureValue - investedAmount
         }
-    }
+    }*/
 
     val scrollState = rememberScrollState()
     Scaffold {
@@ -115,7 +150,7 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
                     .padding(top = 56.dp, start = 16.dp, end = 16.dp)
             ) {
                 //  Secondary Tab Row for SIP Type
-                /*SecondaryScrollableTabRow (
+                SecondaryTabRow (
                     selectedTabIndex = selectedTabIndex,
                     indicator = {},
                     divider = {},
@@ -141,7 +176,7 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
                                 .border(2.dp, MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(25.dp))
                         )
                     }
-                }*/
+                }
 
                 SliderWithTitle(
                     title = "Monthly Investment",
@@ -153,8 +188,8 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
                 )
                 SliderWithTitle(
                     title = "Expected Return (p.a)",
-                    value = expectedReturn,
-                    onValueChange = { expectedReturn = it },
+                    value = expectedReturnRate,
+                    onValueChange = { expectedReturnRate = it },
                     minValue = 1f,
                     maxValue = 30f,
                     allowDecimal = true,
@@ -173,15 +208,15 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
 
                 LabelValueRow(
                     label = "Investment Amount",
-                    value = "$rupeeSymbol ${FormatUtils.formatAmount(investedAmount)}",
+                    value = "$rupeeSymbol ${FormatUtils.formatAmount(sipResult.investedAmount)}",
                 )
                 LabelValueRow(
                     label = "Expected Return",
-                    value = "$rupeeSymbol ${FormatUtils.formatAmount(estReturn)}",
+                    value = "$rupeeSymbol ${FormatUtils.formatAmount(sipResult.estReturn)}",
                 )
                 LabelValueRow(
                     label = "Total Amount",
-                    value = "$rupeeSymbol ${FormatUtils.formatAmount(futureValue)}",
+                    value = "$rupeeSymbol ${FormatUtils.formatAmount(sipResult.totalValue)}",
                 )
             }
         }
