@@ -1,8 +1,6 @@
 package com.nowni.fincalc.ui.screens.calculator_screens
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,24 +20,19 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SecondaryScrollableTabRow
-import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nowni.fincalc.domain.sip.model.SipType
 import com.nowni.fincalc.ui.component.LabelValueRow
 import com.nowni.fincalc.ui.component.SliderWithTitle
 import com.nowni.fincalc.ui.theme.FinCalcTheme
@@ -53,11 +46,7 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
     var expectedReturn by remember { mutableFloatStateOf(12f) }
     var timePeriod by remember { mutableFloatStateOf(10f) }
 
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
-    val sipType = SipType.entries.toTypedArray()
-
     val rupeeSymbol = "₹"
-
 
     val months by remember(timePeriod) {
         derivedStateOf { (timePeriod * 12).toInt() }
@@ -87,7 +76,7 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
     }
 
     val scrollState = rememberScrollState()
-    Scaffold {
+    Scaffold { it ->
         Box(
             modifier = modifier
                 .padding(it)
@@ -120,34 +109,6 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
                     .verticalScroll(scrollState)
                     .padding(top = 56.dp, start = 16.dp, end = 16.dp)
             ) {
-                //  Secondary Tab Row for SIP Type
-                SecondaryScrollableTabRow (
-                    selectedTabIndex = selectedTabIndex,
-                    indicator = {},
-                    divider = {},
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(25.dp)),
-                    containerColor = Color.Transparent,
-                ) {
-                    sipType.forEachIndexed { index, type ->
-                        Tab(
-                            selected = selectedTabIndex == index,
-                            onClick = { selectedTabIndex = index },
-                            text = { Text(type.title) },
-                            selectedContentColor = MaterialTheme.colorScheme.onSurface,
-                            unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(25.dp))
-                                .background(
-                                    if (selectedTabIndex == index)
-                                        MaterialTheme.colorScheme.primaryContainer
-                                    else
-                                        MaterialTheme.colorScheme.surface
-                                )
-                                .border(2.dp, MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(25.dp))
-                        )
-                    }
-                }
 
                 SliderWithTitle(
                     title = "Monthly Investment",
@@ -179,15 +140,15 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
 
                 LabelValueRow(
                     label = "Investment Amount",
-                    value = "$rupeeSymbol ${FormatUtils.formatAmount(investedAmount)}",
+                    value = "$rupeeSymbol ${FormatUtils.formatAmount(amount = investedAmount)}",
                 )
                 LabelValueRow(
                     label = "Expected Return",
-                    value = "$rupeeSymbol ${FormatUtils.formatAmount(estReturn)}",
+                    value = "$rupeeSymbol ${FormatUtils.formatAmount(amount = estReturn)}",
                 )
                 LabelValueRow(
                     label = "Total Amount",
-                    value = "$rupeeSymbol ${FormatUtils.formatAmount(futureValue)}",
+                    value = "$rupeeSymbol ${FormatUtils.formatAmount(amount = futureValue)}",
                 )
             }
         }
@@ -200,6 +161,6 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
 @Composable
 fun SipCalScreenPreview() {
     FinCalcTheme {
-        SipCalScreen(modifier = Modifier.padding(), {})
+        SipCalScreen(modifier = Modifier.padding(), onBack = {})
     }
 }
