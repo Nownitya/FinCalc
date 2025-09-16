@@ -93,7 +93,7 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
     }
 
     val scrollState = rememberScrollState()
-    Scaffold {
+    Scaffold {it ->
         Box(
             modifier = modifier
                 .padding(it)
@@ -206,6 +206,6 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
 @Composable
 fun SipCalScreenPreview() {
     FinCalcTheme {
-        SipCalScreen(modifier = Modifier.padding(), {})
+        SipCalScreen(modifier = Modifier.padding(), onBack = {})
     }
 }
