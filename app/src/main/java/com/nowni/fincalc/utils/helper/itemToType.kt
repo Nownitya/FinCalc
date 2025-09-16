@@ -1,6 +1,6 @@
 package com.nowni.fincalc.utils.helper
 
-import com.nowni.fincalc.models.CalculatorList
+import com.nowni.fincalc.domain.calculator.CalculatorList
 
 internal fun itemToType(item: CalculatorList?): String? {
     return when (item) {

@@ -20,7 +20,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nowni.fincalc.models.CalculatorList
+import com.nowni.fincalc.domain.calculator.CalculatorList
 import com.nowni.fincalc.ui.component.CalculatorCard
 import com.nowni.fincalc.ui.component.FinCalcSearchAppBar
 import com.nowni.fincalc.ui.component.FinCalcTopAppBar

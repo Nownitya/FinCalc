@@ -71,6 +71,7 @@ dependencies {
     //  Work Runtime
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.compose.material3)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

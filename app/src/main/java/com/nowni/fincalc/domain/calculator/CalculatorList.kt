@@ -1,4 +1,4 @@
-package com.nowni.fincalc.models
+package com.nowni.fincalc.domain.calculator
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MultilineChart
