@@ -92,29 +92,6 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
         }
     }
 
-    /*val futureValue by remember(monthlyInvestment, expectedReturnRate, timePeriod) {
-        derivedStateOf {
-            val monthlyRate = expectedReturnRate / 100 / 12
-            if (monthlyRate > 0) {
-                monthlyInvestment * ((1 + monthlyRate).pow(months) - 1) / monthlyRate * (1 + monthlyRate)
-            } else {
-                monthlyInvestment * months
-            }
-        }
-    }
-
-    val investedAmount by remember(monthlyInvestment, timePeriod) {
-        derivedStateOf {
-            monthlyInvestment * months
-        }
-    }
-
-    val estReturn by remember(futureValue, investedAmount) {
-        derivedStateOf {
-            futureValue - investedAmount
-        }
-    }*/
-
     val scrollState = rememberScrollState()
     Scaffold {
         Box(
