@@ -48,7 +48,6 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
 
     val rupeeSymbol = "₹"
 
-
     val months by remember(timePeriod) {
         derivedStateOf { (timePeriod * 12).toInt() }
     }
