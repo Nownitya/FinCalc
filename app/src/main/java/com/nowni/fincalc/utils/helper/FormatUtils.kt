@@ -14,22 +14,11 @@ object FormatUtils {
 
     }
 
-        private val indianLocale = Locale.Builder().setLanguage("en").setRegion("IN").build()
-        private val decimalFormat = DecimalFormat("#,##,##0", java.text.DecimalFormatSymbols(indianLocale))
-        fun formatAmount(amount: Float): String = decimalFormat.format(amount.toInt())
+    private val indianLocale = Locale.Builder().setLanguage("en").setRegion("IN").build()
+    private val decimalFormat =
+        DecimalFormat("#,##,##0", java.text.DecimalFormatSymbols(indianLocale))
+    fun formatAmount(amount: Float): String = decimalFormat.format(amount.toInt())
 
-
-
-    fun formatIndianValue(value: Float): String {
-        val formatter = DecimalFormat("##,##,###")
-        return formatter.format(value.toLong())
-
-    }
-
-//    fun formatAmount(amount: Float, locale: Locale):String{
-//        val formatter = NumberFormat.getNumberInstance(locale)
-//        return formatter.format(amount)
-//    }
 
 
 }

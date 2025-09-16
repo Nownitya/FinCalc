@@ -120,7 +120,6 @@ fun SliderWithTitle(
                             contentDescription = "error",
                             tint = MaterialTheme.colorScheme.error
                         )
-
                     }
                 },
                 singleLine = true,

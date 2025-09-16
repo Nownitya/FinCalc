@@ -8,7 +8,7 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
-import com.nowni.fincalc.models.CalculatorList
+import com.nowni.fincalc.domain.calculator.CalculatorList
 import com.nowni.fincalc.ui.screens.calculator_screens.SipCalScreen
 import com.nowni.fincalc.ui.screens.home_screen.HomeScreen
 import com.nowni.fincalc.utils.helper.itemToType
