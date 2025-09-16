@@ -30,7 +30,6 @@ import com.nowni.fincalc.ui.component.LabelValueRow
 import com.nowni.fincalc.ui.component.SliderWithTitle
 import com.nowni.fincalc.ui.theme.FinCalcTheme
 import com.nowni.fincalc.utils.helper.FormatUtils
-import java.util.Locale
 import kotlin.math.pow
 
 @Composable
@@ -120,10 +119,9 @@ fun SipCalScreen(modifier: Modifier = Modifier,onBack: ()-> Unit) {
 
             Spacer(modifier = Modifier.height(50.dp))
 
-            val locale = Locale.Builder().setLanguage("en").setRegion("In")
             LabelValueRow(
                 label = "Investment Amount",
-                value = FormatUtils.formatAmount(investedAmount, Locale("en", "IN")),
+                value = FormatUtils.formatAmount(investedAmount),
             )
             LabelValueRow(
                 label = "Expected Return",
