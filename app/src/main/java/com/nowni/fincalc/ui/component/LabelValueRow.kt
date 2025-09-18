@@ -41,7 +41,7 @@ fun LabelValueRow(
 @Composable
 fun LabelValueRowPreview() {
     MaterialTheme {
-        Scaffold() {
+        Scaffold {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
