@@ -40,8 +40,8 @@ fun CalculatorCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-            contentColor = MaterialTheme.colorScheme.onSurface
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            contentColor = MaterialTheme.colorScheme.onSurfaceVariant
         ),
         content = {
             Column(
@@ -80,11 +80,6 @@ fun CalculatorCard(
 @Preview(
     showBackground = true, name = "Calculator Card Light", uiMode = Configuration.UI_MODE_NIGHT_NO
 )
-
-//@Preview(showBackground = true,
-//    name = "Calculator Card Night",
-//    uiMode = Configuration.UI_MODE_NIGHT_YES
-//)
 @Composable
 private fun CalculatorCardPreview() {
     FinCalcTheme {

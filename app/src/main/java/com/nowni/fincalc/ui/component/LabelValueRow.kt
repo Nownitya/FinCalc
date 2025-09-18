@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 
 @Composable
@@ -28,12 +29,12 @@ fun LabelValueRow(
         verticalAlignment = Alignment.CenterVertically
     )
     {
-        Text(text = label, style = MaterialTheme.typography.bodyMedium)
-        Text(text = value, style = MaterialTheme.typography.bodyMedium)
+        Text(text = label, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
+            color= MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(text = value, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
+            color = MaterialTheme.colorScheme.onSurface)
 
     }
-
-
 }
 
 @Preview(showBackground = true, showSystemUi = true)

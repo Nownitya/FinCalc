@@ -27,16 +27,13 @@ fun AppNavGraph() {
                     val type = itemToType(item)
 
                     type?.let { backStack.add(CalculatorScreenKey(it)) }
-                }
-            )
+                })
         }
         entry<CalculatorScreenKey> { key ->
             when (key.type) {
                 "SIP" -> SipCalScreen(onBack = {
                     if (backStack.size > 1) backStack.removeLastOrNull()
-                }
-                )
-
+                })
                 "Lumpsum" -> {}
                 "SWP" -> {}
                 "Mutual Fund" -> {}

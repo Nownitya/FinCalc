@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -23,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.nowni.fincalc.domain.calculator.CalculatorList
 import com.nowni.fincalc.ui.component.CalculatorCard
 import com.nowni.fincalc.ui.component.FinCalcSearchAppBar
-import com.nowni.fincalc.ui.component.FinCalcTopAppBar
 import com.nowni.fincalc.ui.theme.FinCalcTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,75 +46,44 @@ fun HomeScreen(
             }
         }
     }
-    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
-        FinCalcSearchAppBar(
-            title = "FinCalc",
-            canNavigateBack = false,
-            query = searchQuery,
-            onQueryChange = { searchQuery = it },
-            isSearchActive = isSearchActive,
-            onSearchActiveChange = { isSearchActive = it },
-            scrollBehavior = scrollBehavior
-        )
-    }, content = {
-        LazyColumn(
-            contentPadding = it,
-            state = listState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            content = {
-                items(
-                    items = filteredItems,
-                    key = { item -> item.name }) { item ->
-                    val index = CalculatorList.allItems.indexOf(item)
-                    CalculatorCard(
-                        item = item, onClick = {
-                            searchQuery = ""
-                            isSearchActive = false
-                            keyBoardController?.hide()
-                            onCardClick(index)
-                        })
-                }
-            })
-    })
+    Scaffold(
+        modifier = Modifier.nestedScroll(
+            scrollBehavior.nestedScrollConnection
+        ),
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            FinCalcSearchAppBar(
+                title = "FinCalc",
+                canNavigateBack = false,
+                query = searchQuery,
+                onQueryChange = { searchQuery = it },
+                isSearchActive = isSearchActive,
+                onSearchActiveChange = { isSearchActive = it },
+                scrollBehavior = scrollBehavior
+            )
+        }, content = {
+            LazyColumn(
+                contentPadding = it,
+                state = listState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                content = {
+                    items(
+                        items = filteredItems, key = { item -> item.name }) { item ->
+                        val index = CalculatorList.allItems.indexOf(item)
+                        CalculatorCard(
+                            item = item, onClick = {
+                                searchQuery = ""
+                                isSearchActive = false
+                                keyBoardController?.hide()
+                                onCardClick(index)
+                            })
+                    }
+                })
+        })
 }
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun HomeScreen1(
-    listState: LazyListState,
-    onCardClick: (index: Int) -> Unit = {},
-) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-
-    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
-        FinCalcTopAppBar(
-            title = "FinCalc", canNavigateBack = false, scrollBehavior = scrollBehavior
-        )
-    }, content = {
-        LazyColumn(
-            contentPadding = it,
-            state = listState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            content = {
-                items(
-                    items = CalculatorList.allItems, key = { item -> item.name }) { item ->
-                    val index = CalculatorList.allItems.indexOf(item)
-                    CalculatorCard(
-                        item = item, onClick = {
-                            onCardClick(index)
-                        })
-                }
-            })
-    })
-}
-
 
 @Preview
 @Composable
@@ -122,8 +91,7 @@ private fun HomeScreenPreview() {
     FinCalcTheme {
         val homeListState = rememberLazyListState()
         HomeScreen(
-            listState = homeListState,
-            onCardClick = {}
+            listState = homeListState, onCardClick = {}
 
         )
     }

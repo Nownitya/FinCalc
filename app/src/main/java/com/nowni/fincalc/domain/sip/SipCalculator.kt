@@ -3,62 +3,52 @@ package com.nowni.fincalc.domain.sip
 import com.nowni.fincalc.domain.sip.model.SipResult
 import kotlin.math.pow
 
-sealed class SipCalculator {
-    abstract fun calculateFutureValue(
+interface SipCalculator {
+    fun calculateSip(
         monthlyInvestment: Float,
-        expectedReturn: Float,
+        expectedReturnRate: Float,
         timePeriod: Float,
     ): SipResult
 }
 
-object OrdinarySipCalculator : SipCalculator() {
-    override fun calculateFutureValue(
+object OrdinarySipCalculator : SipCalculator {
+    override fun calculateSip(
         monthlyInvestment: Float,
-        expectedReturn: Float,
+        expectedReturnRate: Float,
         timePeriod: Float,
     ): SipResult {
         val months = (timePeriod * 12).toInt()
-        val monthlyRate = expectedReturn / 100 / 12
+        val monthlyRate = expectedReturnRate / 100f / 12f
         val invested = monthlyInvestment * months
 
-        val total = if (monthlyRate == 0f) {
-            monthlyInvestment * ((1 + monthlyRate).pow(months) - 1) / monthlyRate
-        } else {
+        val total = if (monthlyRate > 0f) {
+            monthlyInvestment* (((1+monthlyRate).pow(months.toFloat()))-1)/monthlyRate
+
+        }else{
             invested
         }
         val estReturn = total - invested
-
-        return SipResult(
-            investedAmount = invested,
-            estReturn = estReturn,
-            totalValue = total
-        )
+        return SipResult(investedAmount = invested, estReturn = estReturn, totalValue = total)
     }
-
 }
 
-object AnnuityDueSipCalculator : SipCalculator() {
-    override fun calculateFutureValue(
+object AnnuityDueSipCalculator : SipCalculator {
+    override fun calculateSip(
         monthlyInvestment: Float,
-        expectedReturn: Float,
+        expectedReturnRate: Float,
         timePeriod: Float,
     ): SipResult {
         val months = (timePeriod * 12).toInt()
-        val monthlyRate = expectedReturn / 100 / 12
-
+        val monthlyRate = expectedReturnRate / 100f / 12f
         val invested = monthlyInvestment * months
-        val total = if (monthlyRate > 0) {
-            monthlyInvestment * ((1 + monthlyRate).pow(months) - 1) / monthlyRate * (1 + monthlyRate)
+        val total = if (monthlyRate > 0f) {
+            monthlyInvestment * (((1 + monthlyRate).pow(months.toFloat())) - 1) / monthlyRate * (1 + monthlyRate)
         } else {
             invested
         }
         val estReturn = total - invested
 
-        return SipResult(
-            investedAmount = invested,
-            estReturn = estReturn,
-            totalValue = total
-        )
+        return SipResult(investedAmount = invested, estReturn = estReturn, totalValue = total)
     }
 
 }

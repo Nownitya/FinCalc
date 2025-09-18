@@ -28,10 +28,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Devices.PIXEL_4
 import androidx.compose.ui.tooling.preview.Devices.PIXEL_TABLET
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -133,17 +135,19 @@ fun SliderWithTitle(
                     keyboardType = if (allowDecimal) KeyboardType.Decimal else KeyboardType.Number
                 ),
                 colors = TextFieldDefaults.colors(
-//                    focusedContainerColor = MaterialTheme.colorScheme.surface,
                     focusedContainerColor = Color.Transparent,
-//                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
                     unfocusedContainerColor = Color.Transparent,
-//                    disabledContainerColor = MaterialTheme.colorScheme.surface,
                     disabledContainerColor = Color.Transparent,
+
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
                     errorIndicatorColor = Color.Transparent,
-                    errorContainerColor = Color.Red.copy(alpha = 0.1f),
+
+//                    errorContainerColor = Color.Red.copy(alpha = 0.1f),
+                    errorContainerColor = MaterialTheme.colorScheme.errorContainer,
+                    errorCursorColor = MaterialTheme.colorScheme.error,
+                    cursorColor = MaterialTheme.colorScheme.primary
                 ),
                 shape = RoundedCornerShape(50.dp)
 
@@ -151,36 +155,45 @@ fun SliderWithTitle(
         }
 
     }
-    Slider(
-        value = value,
-        onValueChange = { newValue ->
-            val finalValue = if (allowDecimal) newValue else newValue.toInt().toFloat()
-            onValueChange(finalValue.coerceIn(minValue, maxValue))
-        },
-        modifier = Modifier.fillMaxWidth(),
-        enabled = true,
-        valueRange = minValue..maxValue,
-        steps = step,
-        onValueChangeFinished = {
-            // launch some business logic update with the state you hold
-            // viewModel.updateSelectedSliderValue(sliderPosition)
-        },
-        colors = SliderDefaults.colors(
-            activeTrackColor = MaterialTheme.colorScheme.secondary,
-            thumbColor = MaterialTheme.colorScheme.secondary,
-            inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer
+    Column(modifier= Modifier
+        .fillMaxWidth()
+        .padding(end = 8.dp, bottom = 8.dp)
+    ) {
+        Slider(
+            value = value,
+            onValueChange = { newValue ->
+                val finalValue = if (allowDecimal) newValue else newValue.toInt().toFloat()
+                onValueChange(finalValue.coerceIn(minValue, maxValue))
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .clipToBounds(),
+            enabled = true,
+            valueRange = minValue..maxValue,
+            steps = step,
+            onValueChangeFinished = {
+                // launch some business logic update with the state you hold
+                // viewModel.updateSelectedSliderValue(sliderPosition)
+            },
+            colors = SliderDefaults.colors(
+                thumbColor = MaterialTheme.colorScheme.primary,
+                activeTrackColor = MaterialTheme.colorScheme.primary,
+                inactiveTrackColor = MaterialTheme.colorScheme.outlineVariant,
+                activeTickColor = MaterialTheme.colorScheme.onPrimary,
+                inactiveTickColor = MaterialTheme.colorScheme.outlineVariant
 
-        ),
-    )
+            ),
+        )
+    }
 }
 
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, device = PIXEL_4)
 @Preview(showBackground = true, showSystemUi = true, device = PIXEL_TABLET)
 @Composable
 private fun SliderWithTitlePreview() {
     FinCalcTheme {
-        Scaffold {
+        Scaffold {it->
             Column(
                 modifier = Modifier
                     .padding(it)
@@ -205,7 +218,7 @@ private fun SliderWithTitlePreview() {
                     minValue = 1f,
                     maxValue = 30f,
                     allowDecimal = true,
-                    prefixIcon = { Text("%") })
+                    suffixIcon = { Text(" %") })
 
                 SliderWithTitle(
                     title = "Time Period",
@@ -213,7 +226,7 @@ private fun SliderWithTitlePreview() {
                     onValueChange = { timePeriod = it },
                      minValue = 1f,
                     maxValue = 40f,
-                    suffixIcon = { Text("Yr") })
+                    suffixIcon = { Text(" Yr") })
             }
         }
     }
