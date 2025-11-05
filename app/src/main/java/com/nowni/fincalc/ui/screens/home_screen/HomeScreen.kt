@@ -25,6 +25,7 @@ import com.nowni.fincalc.domain.calculator.CalculatorList
 import com.nowni.fincalc.ui.component.CalculatorCard
 import com.nowni.fincalc.ui.component.FinCalcSearchAppBar
 import com.nowni.fincalc.ui.theme.FinCalcTheme
+import com.nowni.fincalc.utils.helper.filterCalculators
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,15 +38,8 @@ fun HomeScreen(
     var isSearchActive by remember { mutableStateOf(false) }
     val keyBoardController = LocalSoftwareKeyboardController.current
 
-    val filteredItems = remember(searchQuery) {
-        if (searchQuery.isBlank()) {
-            CalculatorList.allItems
-        } else {
-            CalculatorList.allItems.filter {
-                it.name.contains(searchQuery, ignoreCase = true)
-            }
-        }
-    }
+    val filteredItems = remember(searchQuery) { filterCalculators(searchQuery) }
+
     Scaffold(
         modifier = Modifier.nestedScroll(
             scrollBehavior.nestedScrollConnection
