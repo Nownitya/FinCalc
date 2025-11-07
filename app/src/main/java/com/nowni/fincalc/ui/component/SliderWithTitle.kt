@@ -65,7 +65,7 @@ fun SliderWithTitle(
 
     //  Update TextField whenever slider or external value changes
     LaunchedEffect(value) {
-        inputText = formatValue(value, allowDecimal)
+        inputText = formatValue(value.toDouble(), allowDecimal)
     }
 
     Column(modifier = modifier.padding(vertical = 8.dp)) {
@@ -102,7 +102,7 @@ fun SliderWithTitle(
                         inputText = if (allowDecimal && sanitizedText.endsWith(".")) {
                             sanitizedText
                         } else {
-                            formatValue(clampedValue, allowDecimal)
+                            formatValue(clampedValue.toDouble(), allowDecimal)
                         }
 
                         //  Show error if below minimum
@@ -206,7 +206,7 @@ private fun SliderWithTitlePreview() {
                 SliderWithTitle(
                     title = "Monthly Investment",
                     value = monthlyInvest,
-                    onValueChange = { it -> monthlyInvest = it },
+                    onValueChange = { monthlyInvest = it },
                     minValue = 100f,
                     maxValue = 10_00_000f,
                     prefixIcon = { Text("₹") })
@@ -214,7 +214,7 @@ private fun SliderWithTitlePreview() {
                 SliderWithTitle(
                     title = "Expected Return Rate.",
                     value = expRetRate,
-                    onValueChange = { it -> expRetRate = it },
+                    onValueChange = { expRetRate = it },
                     minValue = 1f,
                     maxValue = 30f,
                     allowDecimal = true,

@@ -1,5 +1,6 @@
 package com.nowni.fincalc.ui.screens.home_screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,15 +19,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nowni.fincalc.R
 import com.nowni.fincalc.domain.calculator.CalculatorList
 import com.nowni.fincalc.ui.component.CalculatorCard
 import com.nowni.fincalc.ui.component.FinCalcSearchAppBar
 import com.nowni.fincalc.ui.theme.FinCalcTheme
 import com.nowni.fincalc.utils.helper.filterCalculators
 
+@SuppressLint("UnusedValue")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -37,8 +42,11 @@ fun HomeScreen(
     var searchQuery by remember { mutableStateOf("") }
     var isSearchActive by remember { mutableStateOf(false) }
     val keyBoardController = LocalSoftwareKeyboardController.current
+    val context = LocalContext.current
 
-    val filteredItems = remember(searchQuery) { filterCalculators(searchQuery) }
+    val filteredItems = remember(searchQuery) {
+        filterCalculators(searchQuery, context = context)
+    }
 
     Scaffold(
         modifier = Modifier.nestedScroll(
@@ -47,12 +55,13 @@ fun HomeScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             FinCalcSearchAppBar(
-                title = "FinCalc",
+                title = stringResource(id = R.string.app_name),
                 canNavigateBack = false,
                 query = searchQuery,
                 onQueryChange = { searchQuery = it },
                 isSearchActive = isSearchActive,
-                onSearchActiveChange = { isSearchActive = it },
+                onSearchActiveChange = { @SuppressLint("UNUSED_VALUE")
+                isSearchActive = it },
                 scrollBehavior = scrollBehavior
             )
         }, content = {
@@ -70,6 +79,7 @@ fun HomeScreen(
                         CalculatorCard(
                             item = item, onClick = {
                                 searchQuery = ""
+                                @SuppressLint("UNUSED_VALUE")
                                 isSearchActive = false
                                 keyBoardController?.hide()
                                 onCardClick(index)

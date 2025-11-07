@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nowni.fincalc.domain.calculator.CalculatorList
@@ -47,14 +48,14 @@ fun CalculatorCard(
             Column(
                 modifier = Modifier.fillMaxWidth(), content = {
                     Text(
-                        item.name,
+                        stringResource(item.name),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1,
                         modifier = Modifier.padding(start = 40.dp, end = 40.dp, top = 16.dp)
                     )
                     Text(
-                        item.description,
+                        text = stringResource(item.description),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
                         maxLines = 5,

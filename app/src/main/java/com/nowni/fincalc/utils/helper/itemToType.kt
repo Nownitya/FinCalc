@@ -25,5 +25,5 @@ internal fun itemToType(item: CalculatorList?): String? {
         is CalculatorList.StepUpSIP -> "Step-up SIP"
         null -> null
         else -> item.name
-    }
+    } as String?
 }

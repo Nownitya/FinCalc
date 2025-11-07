@@ -37,12 +37,16 @@ android {
 //    }
     kotlin {
         compilerOptions {
+            freeCompilerArgs.add("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
     }
     buildFeatures {
         compose = true
     }
+//    kotlinOptions {
+//        freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
+//    }
 }
 
 dependencies {
@@ -71,7 +75,6 @@ dependencies {
     //  Work Runtime
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.constraintlayout.compose)
-    implementation(libs.androidx.compose.material3)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

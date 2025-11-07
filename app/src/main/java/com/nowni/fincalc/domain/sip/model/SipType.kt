@@ -1,10 +1,10 @@
 package com.nowni.fincalc.domain.sip.model
 
-import com.nowni.fincalc.domain.sip.AnnuityDueSipCalculator
-import com.nowni.fincalc.domain.sip.OrdinarySipCalculator
-import com.nowni.fincalc.domain.sip.SipCalculator
+import com.nowni.fincalc.domain.sip.AnnuityDueComputeSip
+import com.nowni.fincalc.domain.sip.ComputeSip
+import com.nowni.fincalc.domain.sip.OrdinaryComputeSip
 
-enum class SipType(val title: String, val sipCalculator: SipCalculator) {
-    ORDINARY("Ordinary SIP", OrdinarySipCalculator),
-    ANNUITY_DUE("Annuity Due SIP", AnnuityDueSipCalculator),
+enum class SipType(val title: String, val computeSip: ComputeSip) {
+    ORDINARY("Ordinary SIP", OrdinaryComputeSip),
+    ANNUITY_DUE("Annuity Due SIP", AnnuityDueComputeSip),
 }

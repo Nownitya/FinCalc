@@ -49,25 +49,25 @@ fun SipCalScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
     val sipTypes = SipType.entries
     val safeIndex = selectedTabIndex.coerceIn(sipTypes.indices)
-    val selectedCalculator = sipTypes[safeIndex].sipCalculator
+    val selectedCalculator = sipTypes[safeIndex].computeSip
 
     val rupeeSymbol = "₹"
 
     val result by remember(monthlyInvestment, expectedReturnRate, timePeriod, selectedTabIndex) {
         derivedStateOf {
             selectedCalculator.calculateSip(
-                monthlyInvestment = monthlyInvestment,
-                expectedReturnRate = expectedReturnRate,
-                timePeriod = timePeriod
+                monthlyInvestment = monthlyInvestment.toDouble(),
+                expectedReturnRate = expectedReturnRate.toDouble(),
+                timePeriod = timePeriod.toDouble()
             )
         }
     }
 
     val scrollState = rememberScrollState()
-    Scaffold{ it ->
+    Scaffold { innerPadding ->
         Box(
             modifier = modifier
-                .padding(it)
+                .padding(innerPadding)
                 .fillMaxSize(),
         ) {
 

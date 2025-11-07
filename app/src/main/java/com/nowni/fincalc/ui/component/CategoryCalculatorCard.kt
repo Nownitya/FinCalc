@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,7 +50,7 @@ fun CategoryCalculatorCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                category.category,
+                text = stringResource(category.category),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
@@ -78,7 +79,8 @@ fun CategoryCalculatorCard(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SmallCard(
-    modifier: Modifier = Modifier, item: CalculatorList,
+//    modifier: Modifier = Modifier,
+    item: CalculatorList,
     onClick: () -> Unit,
 ) {
     Card(
@@ -106,7 +108,7 @@ fun SmallCard(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = item.name,
+                text = stringResource(item.name),
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontSize = 14.sp,
                     letterSpacing = 0.5.sp
@@ -127,10 +129,10 @@ fun SmallCard(
 @Composable
 fun CategoryCalculatorCardPreview() {
     FinCalcTheme {
-        Scaffold {it
-            Column {
+        Scaffold {innerPadding->
+            Column(modifier = Modifier.padding(innerPadding)) {
                 val category = CalculatorCategory.INVESTMENTS
-                val calculators = CalculatorList.allItems.filter { it.category == category }
+                val calculators = CalculatorList.allItems.filter { item-> item.category == category }
                 CategoryCalculatorCard(
                     category = CalculatorCategory.INVESTMENTS,
                     calculators = calculators,

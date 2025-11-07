@@ -1,5 +1,6 @@
 package com.nowni.fincalc.domain.calculator
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MultilineChart
 import androidx.compose.material.icons.automirrored.filled.ReceiptLong
@@ -34,263 +35,265 @@ import androidx.compose.material.icons.filled.SwapHoriz
 import androidx.compose.material.icons.filled.Timeline
 import androidx.compose.material.icons.filled.Work
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.nowni.fincalc.R
 
-enum class CalculatorCategory(val category: String) {
-    INVESTMENTS("Investments"),
-    GOVERNMENT("Govt & Retirement Schemes"),
-    BANK_DEPOSITS("Bank Deposits & Interest"),
-    LOANS("Loans & EMI"),
-    TAX_SALARY("Tax & Salary"),
-    OTHERS("Others / Planning")
+enum class CalculatorCategory(@StringRes val category: Int) {
+    INVESTMENTS(R.string.category_investments), GOVERNMENT(R.string.category_govt_retirement), BANK_DEPOSITS(
+        R.string.category_bank_deposits
+    ),
+    LOANS(R.string.category_loans), TAX_SALARY(R.string.category_tax_salary), OTHERS(R.string.category_others)
 }
 
 sealed class CalculatorList {
-    abstract val name: String
-    abstract val description: String
+    @get:StringRes
+    abstract val name: Int
+
+    @get:StringRes
+    abstract val description: Int
     abstract val icon: ImageVector
 
     abstract val category: CalculatorCategory
 
     // -------- Investments --------
-    object SIP : CalculatorList() {
-        override val name = "SIP"
-        override val description = "Calculate returns from monthly SIP investments over time."
+    data object SIP : CalculatorList() {
+        override val name = R.string.sip_name
+        override val description = R.string.sip_description
         override val icon = Icons.Default.AccountBalance
         override val category = CalculatorCategory.INVESTMENTS
     }
 
-    object Lumpsum : CalculatorList() {
-        override val name = "Lumpsum"
-        override val description = "Evaluate future value of one-time investments easily."
+    data object Lumpsum : CalculatorList() {
+        override val name = R.string.lumpsum_name
+        override val description = R.string.lumpsum_description
         override val icon = Icons.Default.AttachMoney
         override val category = CalculatorCategory.INVESTMENTS
     }
 
-    object SWP : CalculatorList() {
-        override val name = "SWP"
-        override val description = "Plan monthly withdrawals from mutual fund investments smartly."
+    data object SWP : CalculatorList() {
+        override val name = R.string.swp_name
+        override val description = R.string.swp_description
         override val icon = Icons.AutoMirrored.Filled.TrendingDown
         override val category = CalculatorCategory.INVESTMENTS
     }
 
-    object MutualFund : CalculatorList() {
-        override val name = "Mutual Fund"
-        override val description = "Estimate mutual fund investment returns with compounding."
+    data object MutualFund : CalculatorList() {
+        override val name = R.string.mutual_fund_name
+        override val description = R.string.mutual_fund_description
         override val icon = Icons.AutoMirrored.Filled.ShowChart
         override val category = CalculatorCategory.INVESTMENTS
     }
 
-    object StepUpSIP : CalculatorList() {
-        override val name = "Step-up SIP"
-        override val description = "Plan SIPs with annual investment increment for growth."
+    data object StepUpSIP : CalculatorList() {
+        override val name = R.string.step_up_sip_name
+        override val description = R.string.step_up_sip_description
         override val icon = Icons.AutoMirrored.Filled.TrendingUp
         override val category = CalculatorCategory.INVESTMENTS
     }
 
-    object StockAverage : CalculatorList() {
-        override val name = "Stock Average"
-        override val description = "Average out stock price across multiple purchases."
+    data object StockAverage : CalculatorList() {
+        override val name = R.string.stock_average_name
+        override val description = R.string.stock_average_description
         override val icon = Icons.Default.StackedLineChart
         override val category = CalculatorCategory.INVESTMENTS
     }
 
-    object XIRR : CalculatorList() {
-        override val name = "XIRR"
-        override val description = "Calculate XIRR for uneven cash-flows and investments."
+    data object XIRR : CalculatorList() {
+        override val name = R.string.xirr_name
+        override val description = R.string.xirr_description
         override val icon = Icons.Default.Timeline
         override val category = CalculatorCategory.INVESTMENTS
     }
 
-    object CAGR : CalculatorList() {
-        override val name = "CAGR"
-        override val description = "Measure compound annual growth rate of investments."
+    data object CAGR : CalculatorList() {
+        override val name = R.string.cagr_name
+        override val description = R.string.cagr_description
         override val icon = Icons.AutoMirrored.Filled.ShowChart
         override val category = CalculatorCategory.INVESTMENTS
     }
 
     // -------- Government & Retirement --------
-    object SSY : CalculatorList() {
-        override val name = "SSY"
-        override val description = "Calculate returns from Sukanya Samriddhi Yojana deposits."
+    data object SSY : CalculatorList() {
+        override val name = R.string.ssy_name
+        override val description = R.string.ssy_description
         override val icon = Icons.Default.Favorite
         override val category = CalculatorCategory.GOVERNMENT
     }
 
-    object PPF : CalculatorList() {
-        override val name = "PPF"
-        override val description = "Estimate maturity and interest earned on PPF."
+    data object PPF : CalculatorList() {
+        override val name = R.string.ppf_name
+        override val description = R.string.ppf_description
         override val icon = Icons.Default.AccountBalanceWallet
         override val category = CalculatorCategory.GOVERNMENT
     }
 
-    object EPF : CalculatorList() {
-        override val name = "EPF"
-        override val description = "Track Employees’ Provident Fund maturity and interest."
+    data object EPF : CalculatorList() {
+        override val name = R.string.epf_name
+        override val description = R.string.epf_description
         override val icon = Icons.Default.Savings
         override val category = CalculatorCategory.GOVERNMENT
     }
 
-    object NPS : CalculatorList() {
-        override val name = "NPS"
-        override val description = "Plan retirement wealth with National Pension Scheme calculator."
+    data object NPS : CalculatorList() {
+        override val name = R.string.nps_name
+        override val description = R.string.nps_description
         override val icon = Icons.Default.Security
         override val category = CalculatorCategory.GOVERNMENT
     }
 
-    object APY : CalculatorList() {
-        override val name = "APY"
-        override val description = "Plan pension benefits under Atal Pension Yojana."
+    data object APY : CalculatorList() {
+        override val name = R.string.apy_name
+        override val description = R.string.apy_description
         override val icon = Icons.Default.Shield
         override val category = CalculatorCategory.GOVERNMENT
     }
 
-    object Retirement : CalculatorList() {
-        override val name = "Retirement"
-        override val description = "Estimate how much money you'll need after retirement."
+    data object Retirement : CalculatorList() {
+        override val name = R.string.retirement_name
+        override val description = R.string.retirement_description
         override val icon = Icons.Default.Person
         override val category = CalculatorCategory.GOVERNMENT
     }
 
-    object NSC : CalculatorList() {
-        override val name = "NSC"
-        override val description = "Estimate maturity value of National Savings Certificates."
+    data object NSC : CalculatorList() {
+        override val name = R.string.nsc_name
+        override val description = R.string.nsc_description
         override val icon = Icons.AutoMirrored.Filled.ReceiptLong
         override val category = CalculatorCategory.GOVERNMENT
     }
 
-    object PostOfficeMIS : CalculatorList() {
-        override val name = "Post Office MIS"
-        override val description = "Calculate monthly income and returns from MIS."
+    data object PostOfficeMIS : CalculatorList() {
+        override val name = R.string.post_office_mis_name
+        override val description = R.string.post_office_mis_description
         override val icon = Icons.Default.MarkEmailRead
         override val category = CalculatorCategory.GOVERNMENT
     }
 
-    object SCSS : CalculatorList() {
-        override val name = "SCSS"
-        override val description = "Estimate earnings from Senior Citizen Savings Scheme."
+    data object SCSS : CalculatorList() {
+        override val name = R.string.scss_name
+        override val description = R.string.scss_description
         override val icon = Icons.Default.EmojiPeople
         override val category = CalculatorCategory.GOVERNMENT
     }
 
     // -------- Bank Deposits --------
-    object FD : CalculatorList() {
-        override val name = "FD"
-        override val description = "Calculate fixed deposit interest and final maturity value."
+    data object FD : CalculatorList() {
+        override val name = R.string.fd_name
+        override val description = R.string.fd_description
         override val icon = Icons.Default.Money
         override val category = CalculatorCategory.BANK_DEPOSITS
     }
 
-    object RD : CalculatorList() {
-        override val name = "RD"
-        override val description = "Estimate interest and maturity for recurring deposits."
+    data object RD : CalculatorList() {
+        override val name = R.string.rd_name
+        override val description = R.string.rd_description
         override val icon = Icons.Default.Schedule
         override val category = CalculatorCategory.BANK_DEPOSITS
     }
 
-    object SimpleInterest : CalculatorList() {
-        override val name = "Simple Interest"
-        override val description = "Calculate interest using principal, rate, and time."
+    data object SimpleInterest : CalculatorList() {
+        override val name = R.string.simple_interest_name
+        override val description = R.string.simple_interest_description
         override val icon = Icons.Default.BarChart
         override val category = CalculatorCategory.BANK_DEPOSITS
     }
 
-    object CompoundInterest : CalculatorList() {
-        override val name = "Compound Interest"
-        override val description = "Compute interest on interest for compounded returns."
+    data object CompoundInterest : CalculatorList() {
+        override val name = R.string.compound_interest_name
+        override val description = R.string.compound_interest_description
         override val icon = Icons.AutoMirrored.Filled.MultilineChart
         override val category = CalculatorCategory.BANK_DEPOSITS
     }
 
     // -------- Loans & EMI --------
-    object EMI : CalculatorList() {
-        override val name = "EMI"
-        override val description = "Break down loan repayments into equal monthly installments."
+    data object EMI : CalculatorList() {
+        override val name = R.string.emi_name
+        override val description = R.string.emi_description
         override val icon = Icons.Default.Payments
         override val category = CalculatorCategory.LOANS
     }
 
-    object VehicleLoanEMI : CalculatorList() {
-        override val name = "Vehicle Loan EMI"
-        override val description = "Plan EMIs for car or two-wheeler loans."
+    data object VehicleLoanEMI : CalculatorList() {
+        override val name = R.string.vehicle_loan_emi_name
+        override val description = R.string.vehicle_loan_emi_description
         override val icon = Icons.Default.DirectionsCar
         override val category = CalculatorCategory.LOANS
     }
 
-    object HomeLoanEMI : CalculatorList() {
-        override val name = "Home Loan EMI"
-        override val description = "Calculate EMI and interest on housing loans."
+    data object HomeLoanEMI : CalculatorList() {
+        override val name = R.string.home_loan_emi_name
+        override val description = R.string.home_loan_emi_description
         override val icon = Icons.Default.House
         override val category = CalculatorCategory.LOANS
     }
 
-    object FlatVsReducing : CalculatorList() {
-        override val name = "Flat vs Reducing"
-        override val description = "Compare flat and reducing interest rate systems."
+    data object FlatVsReducing : CalculatorList() {
+        override val name = R.string.flat_vs_reducing_name
+        override val description = R.string.flat_vs_reducing_description
         override val icon = Icons.Default.SwapHoriz
         override val category = CalculatorCategory.LOANS
     }
 
     // -------- Tax & Salary --------
-    object IncomeTax : CalculatorList() {
-        override val name = "Income Tax"
-        override val description = "Calculate annual income tax liability and tax slabs."
+    data object IncomeTax : CalculatorList() {
+        override val name = R.string.income_tax_name
+        override val description = R.string.income_tax_description
         override val icon = Icons.Default.Receipt
         override val category = CalculatorCategory.TAX_SALARY
     }
 
-    object HRA : CalculatorList() {
-        override val name = "HRA"
-        override val description = "Calculate House Rent Allowance exemption for tax savings."
+    data object HRA : CalculatorList() {
+        override val name = R.string.hra_name
+        override val description = R.string.hra_description
         override val icon = Icons.Default.Home
         override val category = CalculatorCategory.TAX_SALARY
     }
 
-    object TDS : CalculatorList() {
-        override val name = "TDS"
-        override val description = "Estimate tax deducted at source on payments received."
+    data object TDS : CalculatorList() {
+        override val name = R.string.tds_name
+        override val description = R.string.tds_description
         override val icon = Icons.Default.Calculate
         override val category = CalculatorCategory.TAX_SALARY
     }
 
-    object GST : CalculatorList() {
-        override val name = "GST"
-        override val description = "Break down GST into CGST, SGST and IGST."
+    data object GST : CalculatorList() {
+        override val name = R.string.gst_name
+        override val description = R.string.gst_description
         override val icon = Icons.Default.MoneyOff
         override val category = CalculatorCategory.TAX_SALARY
     }
 
-    object Gratuity : CalculatorList() {
-        override val name = "Gratuity"
-        override val description = "Estimate employee gratuity benefits based on salary."
+    data object Gratuity : CalculatorList() {
+        override val name = R.string.gratuity_name
+        override val description = R.string.gratuity_description
         override val icon = Icons.Default.Work
         override val category = CalculatorCategory.TAX_SALARY
     }
 
-    object Salary : CalculatorList() {
-        override val name = "Salary"
-        override val description = "View salary breakup including tax, HRA, and allowances."
+    data object Salary : CalculatorList() {
+        override val name = R.string.salary_name
+        override val description = R.string.salary_description
         override val icon = Icons.Default.AccountBox
         override val category = CalculatorCategory.TAX_SALARY
     }
 
     // -------- Others --------
-    object Brokerage : CalculatorList() {
-        override val name = "Brokerage"
-        override val description = "Calculate charges for stock trading or investment transactions."
+    data object Brokerage : CalculatorList() {
+        override val name = R.string.brokerage_name
+        override val description = R.string.brokerage_description
         override val icon = Icons.AutoMirrored.Filled.TrendingFlat
         override val category = CalculatorCategory.OTHERS
     }
 
-    object Margin : CalculatorList() {
-        override val name = "Margin"
-        override val description = "Find required margin for intraday or delivery trades."
+    data object Margin : CalculatorList() {
+        override val name = R.string.margin_name
+        override val description = R.string.margin_description
         override val icon = Icons.Default.Assessment
         override val category = CalculatorCategory.OTHERS
     }
 
-    object Inflation : CalculatorList() {
-        override val name = "Inflation"
-        override val description = "Understand value erosion of money due to inflation."
+    data object Inflation : CalculatorList() {
+        override val name = R.string.inflation_name
+        override val description = R.string.inflation_description
         override val icon = Icons.AutoMirrored.Filled.TrendingDown
         override val category = CalculatorCategory.OTHERS
     }
@@ -333,17 +336,17 @@ sealed class CalculatorList {
             XIRR
         )
 
-        fun findByTitle(name: String): CalculatorList? = allItems.find { it.name == name }
+//        fun findByTitle(name: String, context: Context): CalculatorList? = allItems.find { context.getString(it.name) == name }
+//
+//        fun search(query: String, context: Context): List<CalculatorList> = allItems.filter {
+//            context.getString(it.name).contains(
+//                query, ignoreCase = true
+//            ) || context.getString(it.description).contains(
+//                query, ignoreCase = true
+//            )
+//        }
 
-        fun search(query: String): List<CalculatorList> = allItems.filter {
-            it.name.contains(
-                query, ignoreCase = true
-            ) || it.description.contains(
-                query, ignoreCase = true
-            )
-        }
-
-        fun groupByCategory(): Map<CalculatorCategory, List<CalculatorList>> =
-            allItems.groupBy { it.category }
+//        fun groupByCategory(): Map<CalculatorCategory, List<CalculatorList>> =
+//            allItems.groupBy { it.category }
     }
 }

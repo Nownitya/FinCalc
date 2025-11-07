@@ -1,3 +1,149 @@
 <resources>
     <string name="app_name">FinCalc</string>
+
+    <!-- Calculator Categories -->
+    <string name="category_investments">Investments</string>
+    <string name="category_govt_retirement">Govt &amp; Retirement Schemes</string>
+    <string name="category_bank_deposits">Bank Deposits &amp; Interest</string>
+    <string name="category_loans">Loans &amp; EMI</string>
+    <string name="category_tax_salary">Tax &amp; Salary</string>
+    <string name="category_others">Others / Planning</string>
+
+    <!-- SIP Calculator -->
+    <string name="sip_name">SIP</string>
+    <string name="sip_description">Calculate returns from monthly SIP investments over time.</string>
+
+    <!-- Lumpsum Calculator -->
+    <string name="lumpsum_name">Lumpsum</string>
+    <string name="lumpsum_description">Evaluate future value of one-time investments easily.</string>
+
+    <!-- SWP Calculator -->
+    <string name="swp_name">SWP</string>
+    <string name="swp_description">Plan monthly withdrawals from mutual fund investments smartly.</string>
+
+    <!-- Mutual Fund Calculator -->
+    <string name="mutual_fund_name">Mutual Fund</string>
+    <string name="mutual_fund_description">Estimate mutual fund investment returns with compounding.</string>
+
+    <!-- Step-up SIP Calculator -->
+    <string name="step_up_sip_name">Step-up SIP</string>
+    <string name="step_up_sip_description">Plan SIPs with annual investment increment for growth.</string>
+
+    <!-- Stock Average Calculator -->
+    <string name="stock_average_name">Stock Average</string>
+    <string name="stock_average_description">Average out stock price across multiple purchases.</string>
+
+    <!-- XIRR Calculator -->
+    <string name="xirr_name">XIRR</string>
+    <string name="xirr_description">Calculate XIRR for uneven cash-flows and investments.</string>
+
+    <!-- CAGR Calculator -->
+    <string name="cagr_name">CAGR</string>
+    <string name="cagr_description">Measure compound annual growth rate of investments.</string>
+
+    <!-- SSY Calculator -->
+    <string name="ssy_name">SSY</string>
+    <string name="ssy_description">Calculate returns from Sukanya Samriddhi Yojana deposits.</string>
+
+    <!-- PPF Calculator -->
+    <string name="ppf_name">PPF</string>
+    <string name="ppf_description">Estimate maturity and interest earned on PPF.</string>
+
+    <!-- EPF Calculator -->
+    <string name="epf_name">EPF</string>
+    <string name="epf_description">Track Employees’ Provident Fund maturity and interest.</string>
+
+    <!-- NPS Calculator -->
+    <string name="nps_name">NPS</string>
+    <string name="nps_description">Plan retirement wealth with National Pension Scheme calculator.</string>
+
+    <!-- APY Calculator -->
+    <string name="apy_name">APY</string>
+    <string name="apy_description">Plan pension benefits under Atal Pension Yojana.</string>
+
+    <!-- Retirement Calculator -->
+    <string name="retirement_name">Retirement</string>
+    <string name="retirement_description">Estimate how much money you\'ll need after retirement.</string>
+
+    <!-- NSC Calculator -->
+    <string name="nsc_name">NSC</string>
+    <string name="nsc_description">Estimate maturity value of National Savings Certificates.</string>
+
+    <!-- Post Office MIS Calculator -->
+    <string name="post_office_mis_name">Post Office MIS</string>
+    <string name="post_office_mis_description">Calculate monthly income and returns from MIS.</string>
+
+    <!-- SCSS Calculator -->
+    <string name="scss_name">SCSS</string>
+    <string name="scss_description">Estimate earnings from Senior Citizen Savings Scheme.</string>
+
+    <!-- FD Calculator -->
+    <string name="fd_name">FD</string>
+    <string name="fd_description">Calculate fixed deposit interest and final maturity value.</string>
+
+    <!-- RD Calculator -->
+    <string name="rd_name">RD</string>
+    <string name="rd_description">Estimate interest and maturity for recurring deposits.</string>
+
+    <!-- Simple Interest Calculator -->
+    <string name="simple_interest_name">Simple Interest</string>
+    <string name="simple_interest_description">Calculate interest using principal, rate, and time.</string>
+
+    <!-- Compound Interest Calculator -->
+    <string name="compound_interest_name">Compound Interest</string>
+    <string name="compound_interest_description">Compute interest on interest for compounded returns.</string>
+
+    <!-- EMI Calculator -->
+    <string name="emi_name">EMI</string>
+    <string name="emi_description">Break down loan repayments into equal monthly installments.</string>
+
+    <!-- Vehicle Loan EMI Calculator -->
+    <string name="vehicle_loan_emi_name">Vehicle Loan EMI</string>
+    <string name="vehicle_loan_emi_description">Plan EMIs for car or two-wheeler loans.</string>
+
+    <!-- Home Loan EMI Calculator -->
+    <string name="home_loan_emi_name">Home Loan EMI</string>
+    <string name="home_loan_emi_description">Calculate EMI and interest on housing loans.</string>
+
+    <!-- Flat vs Reducing Calculator -->
+    <string name="flat_vs_reducing_name">Flat vs Reducing</string>
+    <string name="flat_vs_reducing_description">Compare flat and reducing interest rate systems.</string>
+
+    <!-- Income Tax Calculator -->
+    <string name="income_tax_name">Income Tax</string>
+    <string name="income_tax_description">Calculate annual income tax liability and tax slabs.</string>
+
+    <!-- HRA Calculator -->
+    <string name="hra_name">HRA</string>
+    <string name="hra_description">Calculate House Rent Allowance exemption for tax savings.</string>
+
+    <!-- TDS Calculator -->
+    <string name="tds_name">TDS</string>
+    <string name="tds_description">Estimate tax deducted at source on payments received.</string>
+
+    <!-- GST Calculator -->
+    <string name="gst_name">GST</string>
+    <string name="gst_description">Break down GST into CGST, SGST and IGST.</string>
+
+    <!-- Gratuity Calculator -->
+    <string name="gratuity_name">Gratuity</string>
+    <string name="gratuity_description">Estimate employee gratuity benefits based on salary.</string>
+
+    <!-- Salary Calculator -->
+    <string name="salary_name">Salary</string>
+    <string name="salary_description">View salary breakup including tax, HRA, and allowances.</string>
+
+    <!-- Brokerage Calculator -->
+    <string name="brokerage_name">Brokerage</string>
+    <string name="brokerage_description">Calculate charges for stock trading or investment transactions.</string>
+
+    <!-- Margin Calculator -->
+    <string name="margin_name">Margin</string>
+    <string name="margin_description">Find required margin for intraday or delivery trades.</string>
+
+    <!-- Inflation Calculator -->
+    <string name="inflation_name">Inflation</string>
+    <string name="inflation_description">Understand value erosion of money due to inflation.</string>
+
+
 </resources>
